@@ -89,7 +89,7 @@ RUN echo "deb-src http://deb.debian.org/debian stretch main" > /etc/apt/sources.
 
 FROM debian:stretch-slim
 
-label maintainer="Jacob Alberty <jacob.alberty@foundigital.com>"
+label maintainer="Amit Barthwal <amit1barthwal@gmail.com>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -99,9 +99,8 @@ RUN apt update \
  && apt -qy install libssl1.1 /tmp/squid.deb \
  && rm -rf /var/lib/apt/lists/*
 
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY entrypoint.sh /sbin/docker-entrypoint.sh
+RUN chmod 755 /sbin/docker-entrypoint.sh
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["squid", "-NYC", "-f", "/conf/squid.conf"]
+EXPOSE 3128/tcp
+ENTRYPOINT ["/sbin/docker-entrypoint.sh"]
