@@ -104,7 +104,7 @@ RUN apt update \
  && apt -qy install libssl1.1 /tmp/squid.deb \
  && rm -rf /var/lib/apt/lists/*
 
-COPY entrypoint.sh /sbin/docker-entrypoint.sh
+COPY docker-entrypoint.sh /sbin/docker-entrypoint.sh
 RUN chmod 755 /sbin/docker-entrypoint.sh
 
 EXPOSE 3128/tcp
