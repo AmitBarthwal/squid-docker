@@ -2,6 +2,11 @@ FROM debian:stretch as builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ENV SQUID_VERSION=3.5.27 \
+    SQUID_CACHE_DIR=/var/spool/squid \
+    SQUID_LOG_DIR=/var/log/squid \
+    SQUID_USER=proxy
+    
 ENV SOURCEURL=http://www.squid-cache.org/Versions/v4/squid-4.6.tar.gz
 
 ENV builddeps=" \
